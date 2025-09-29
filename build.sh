@@ -5,8 +5,9 @@ user_uid=`id -u`
 user_gid=1000 #`id -g`
 
 docker build \
+  --pull \
+  --no-cache \
   --build-arg USERNAME="${username}" \
   --build-arg USER_UID="${user_uid}" \
   --build-arg USER_GID="${user_gid}" \
-  --no-cache \
   -t "${dirname}" .
