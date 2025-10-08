@@ -25,7 +25,7 @@ setup(
         ],
     },
     entry_points={
-        'console_scripts': ['move_turtle = first_package.move_turtle:main'
+        'console_scripts': ['move_turtle = first_package.move_turtle:main', 'distance_turtle = first_package.distance_turtle:main'
         ]
     },
 )
