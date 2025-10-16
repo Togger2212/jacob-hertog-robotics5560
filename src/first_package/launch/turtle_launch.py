@@ -9,12 +9,7 @@ def generate_launch_description():
             executable='move_turtle',
             name='move_turtle'
         ),
-        Node(
-            package='first_package',
-            namespace='turtlesim1',
-            executable='distance_turtle',
-            name='distance_turtle'
-        ),
+       
         Node(
             package='turtlesim',
             namespace='turtlesim1',

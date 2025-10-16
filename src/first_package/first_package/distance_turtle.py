@@ -32,7 +32,7 @@ class TurtleDistance(Node):
         self.pose.x = inputx
         self.pose.y = inputy
         self.publisher_.publish(Float32(data=self.totald))
-        self.get_logger().info('Distance: "%f"' % self.totald)
+        
         
         
 

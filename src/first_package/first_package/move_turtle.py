@@ -53,8 +53,12 @@ class TurtleSwim(Node):
         self.vel.angular.z = 3.14159/2.0
 
     def stop(self):
+        # stop the robot and cancel the timer; don't call rclpy.shutdown() here
         self.vel = Twist()
-        rclpy.shutdown()
+        try:
+            self.timer.cancel()
+        except Exception:
+            pass
         
     
 

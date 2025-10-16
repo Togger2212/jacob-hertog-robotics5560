@@ -9,9 +9,12 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name, ['launch/turtle_launch.py'])
-        
+        ('share/' + package_name, [
+            'package.xml',
+            'launch/turtle_launch.py',
+            'launch/launch_2.py',
+            'launch/launch_3.py',
+        ]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,7 +28,10 @@ setup(
         ],
     },
     entry_points={
-        'console_scripts': ['move_turtle = first_package.move_turtle:main', 'distance_turtle = first_package.distance_turtle:main'
+        'console_scripts': [
+            'move_turtle = first_package.move_turtle:main',
+            'distance_turtle = first_package.distance_turtle:main',
+            'conversion = first_package.conversion:main',
         ]
     },
 )
