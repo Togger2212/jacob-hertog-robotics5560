@@ -15,10 +15,5 @@ def generate_launch_description():
             namespace='turtlesim1',
             executable='turtlesim_node',
             name='turtlesim_node'
-        ),
-        Node(
-            package='turtlesim',
-            namespace='turtlesim1',
-            executable='turtle_teleop_key',
-            name='teleop_twist_key')
+        )
     ])
