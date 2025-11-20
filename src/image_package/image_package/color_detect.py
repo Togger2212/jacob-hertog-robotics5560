@@ -15,7 +15,7 @@ class ColorDetect(Node):
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
-        self.publisher_ = self.create_publisher(Image, 'image', 10)
+        self.publisher_ = self.create_publisher(Image, 'color_detected', 10)
         self.bridge = CvBridge()
 
     def listener_callback(self, msg):
@@ -41,7 +41,7 @@ class ColorDetect(Node):
         elif self.color == 'green':
             lower = (40, 70, 70)
             upper = (80, 255, 255)
-            
+
         elif self.color == 'yellow':
             lower = (20, 100, 100)
             upper = (40, 255, 255)
@@ -50,23 +50,17 @@ class ColorDetect(Node):
         mask1 = cv2.inRange(hsv_image, lower, upper)
     
 
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 
         # 2) morphological open (remove small objects)
-        mask_open = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, kernel, iterations=1)
+        mask_open = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, kernel, iterations=4)
 
         # 3) morphological close (fill small holes)
-        mask_clean = cv2.morphologyEx(mask_open, cv2.MORPH_CLOSE, kernel, iterations=2)
-
-        # 4) optional final dilation to make regions slightly larger
-        mask_erode = cv2.erode(mask_clean, kernel, iterations=2)
-        mask_dilate = cv2.dilate(mask_erode, kernel, iterations=2)
-        
-
+        mask_clean = cv2.morphologyEx(mask_open, cv2.MORPH_CLOSE, kernel, iterations=4)
 
 
         # Apply mask to original image
-        detected_image = cv2.bitwise_and(cv_image, cv_image, mask=mask_dilate)
+        detected_image = cv2.bitwise_and(cv_image, cv_image, mask=mask_clean)
 
         # Convert back to ROS Image message and publish
         red_detected_msg = self.bridge.cv2_to_imgmsg(detected_image, encoding='bgr8')

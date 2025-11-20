@@ -20,7 +20,12 @@ def generate_launch_description():
             package='image_view',
             executable='image_view',
             name='image_view',
-            output='screen'
-            #remappings=[('image', '/camera/color_detected')],
+            output='screen',
+            remappings=[('image', 'color_detected')],
         ),
+        Node(
+            package='image_package',
+            executable='object_detect',
+            name='object_detect'
+        )
     ])

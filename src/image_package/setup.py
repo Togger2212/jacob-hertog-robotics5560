@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'color_detect = image_package.color_detect:main',
+            'color_detect = image_package.color_detect:main', 'object_detect = image_package.object_cords:main'
         ],
     },
 )
